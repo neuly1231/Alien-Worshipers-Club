@@ -16,9 +16,16 @@ body {
     color: white;
     font-family: 'Noto Sans KR', sans-serif;
     overflow-x: hidden;
+    line-height: 1.6; /* 가독성 개선 */
 }
 
-/* 사이버펑크 배경 효과 */
+/* 이미지 반응형 기본 설정 */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 배경 효과 (클릭 방지 추가) */
 .grid-bg {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -27,6 +34,7 @@ body {
         linear-gradient(90deg, rgba(162, 255, 0, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     z-index: -1;
+    pointer-events: none; /* 배경 클릭 방지 */
 }
 
 .scanline {
@@ -36,6 +44,7 @@ body {
     opacity: 0.5;
     z-index: 10;
     animation: scan 4s linear infinite;
+    pointer-events: none;
 }
 
 @keyframes scan {
@@ -43,8 +52,9 @@ body {
     100% { top: 100%; }
 }
 
+/* 헤더 */
 header {
-    padding: 2rem 5%;
+    padding: 1.5rem 5%;
     border-bottom: 1px solid var(--main-green);
 }
 
@@ -52,11 +62,12 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* 화면이 작으면 줄바꿈 허용 */
 }
 
 .logo {
     font-family: 'Orbitron', sans-serif;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--main-green);
     text-shadow: 0 0 10px var(--main-green);
@@ -64,43 +75,54 @@ nav {
 
 .school-name {
     font-family: 'Orbitron', sans-serif;
-    letter-spacing: 2px;
-    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
     color: var(--neon-pink);
+    text-align: right;
 }
 
-/* Hero Section */
+/* Hero Section (메인 영역) */
 .hero {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: 5rem 5%;
+    justify-content: space-between; /* 간격 균등 배치 */
+    padding: 3rem 5%; /* 상하 여백 줄임 */
     min-height: 80vh;
+    gap: 2rem;
+}
+
+.hero-content {
+    flex: 1; /* 공간 1 차지 */
+    min-width: 300px;
 }
 
 .hero-content h1 {
-    font-size: 4rem;
+    font-size: 3.5rem; /* 기본 폰트 사이즈 조정 */
     margin-bottom: 1rem;
     font-weight: 900;
+    line-height: 1.2;
 }
 
 .glitch {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--main-green);
-    position: relative;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .tagline {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     opacity: 0.8;
     margin-bottom: 2rem;
     border-left: 4px solid var(--main-green);
     padding-left: 15px;
+    word-break: keep-all; /* 한글 단어 끊김 방지 */
 }
 
-/* 외계인 이미지 스타일 */
+/* 외계인 이미지 영역 */
 .hero-image {
+    flex: 1;
     position: relative;
     display: flex;
     justify-content: center;
@@ -108,7 +130,8 @@ nav {
 }
 
 .alien-plush {
-    width: 350px;
+    width: 100%;
+    max-width: 350px; /* 최대 크기 제한 */
     filter: drop-shadow(0 0 20px var(--main-green));
     animation: float 3s ease-in-out infinite;
     z-index: 2;
@@ -116,8 +139,8 @@ nav {
 
 .neon-circle {
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: 350px; /* 이미지 크기에 맞춰 조정 */
+    height: 350px;
     border: 2px solid var(--main-green);
     border-radius: 50%;
     box-shadow: 0 0 50px var(--main-green);
@@ -129,7 +152,7 @@ nav {
     50% { transform: translateY(-20px); }
 }
 
-/* Activity Cards */
+/* Activities Section */
 .activities {
     padding: 5rem 5%;
 }
@@ -137,14 +160,16 @@ nav {
 .section-title {
     font-family: 'Orbitron', sans-serif;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 3rem;
     color: var(--main-green);
 }
 
+/* 그리드 반응형 설정 */
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* 카드의 최소 크기를 250px로 설정하되 화면이 꽉 차게 늘어남 */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
     gap: 20px;
 }
 
@@ -154,12 +179,11 @@ nav {
     border: 1px solid #333;
     transition: 0.3s;
     position: relative;
-    overflow: hidden;
 }
 
 .card:hover {
     border-color: var(--main-green);
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     box-shadow: 0 0 20px rgba(162, 255, 0, 0.2);
 }
 
@@ -173,12 +197,12 @@ nav {
 
 /* Warning Section */
 .warning {
-    padding: 5rem 5%;
+    padding: 3rem 5%;
 }
 
 .warning-box {
     border: 2px solid var(--neon-pink);
-    padding: 3rem;
+    padding: 2rem;
     text-align: center;
     background: rgba(255, 0, 255, 0.05);
 }
@@ -186,13 +210,13 @@ nav {
 .warning-box h4 {
     font-family: 'Orbitron', sans-serif;
     color: var(--neon-pink);
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
 .status-bar {
     width: 100%;
-    height: 10px;
+    height: 8px;
     background: #222;
     margin-top: 2rem;
 }
@@ -210,14 +234,15 @@ nav {
     100% { width: 100%; }
 }
 
-/* Buttons */
+/* 버튼 */
 .btn-primary {
     background: transparent;
     border: 1px solid var(--main-green);
     color: var(--main-green);
-    padding: 1rem 2.5rem;
+    padding: 0.8rem 2rem;
     font-family: 'Orbitron', sans-serif;
     font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -232,7 +257,86 @@ footer {
     padding: 2rem;
     text-align: center;
     font-family: 'Orbitron', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     opacity: 0.6;
     border-top: 1px solid #222;
+}
+
+/* =========================================
+   📱 반응형 미디어 쿼리 (핵심 부분)
+   ========================================= */
+
+/* 태블릿 및 모바일 (화면 너비 768px 이하) */
+@media (max-width: 768px) {
+    /* 헤더: 로고와 학교 이름을 가운데 정렬하고 세로 배치 */
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .school-name {
+        text-align: center;
+    }
+
+    /* 메인 화면: 글자와 이미지를 세로로 배치 */
+    .hero {
+        flex-direction: column-reverse; /* 이미지가 위로 가도록 하려면 column, 아래로 가려면 column-reverse */
+        text-align: center;
+        padding-top: 2rem;
+        gap: 3rem;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .tagline {
+        border-left: none; /* 모바일에서는 왼쪽 선 제거 */
+        border-bottom: 2px solid var(--main-green); /* 대신 아래 선 추가 */
+        padding-left: 0;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem; /* 모바일에서 제목 크기 축소 */
+    }
+
+    /* 이미지와 네온 원 크기 축소 */
+    .alien-plush {
+        width: 250px;
+    }
+
+    .neon-circle {
+        width: 280px;
+        height: 280px;
+    }
+
+    /* 경고 박스 폰트 조절 */
+    .warning-box {
+        padding: 1.5rem;
+    }
+    
+    .warning-box h4 {
+        font-size: 1.2rem;
+    }
+}
+
+/* 아주 작은 모바일 (화면 너비 480px 이하) */
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .glitch {
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        width: 100%; /* 버튼을 꽉 차게 */
+    }
+    
+    .logo {
+        font-size: 1.8rem;
+    }
 }
